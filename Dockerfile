@@ -7,3 +7,6 @@ RUN apt-get update && apt-get install -y magic-wormhole
 RUN usermod -s /bin/bash www-data
 RUN chown www-data:www-data /var/www
 USER www-data:www-data
+
+# Overwrite wp-config.php to set WP_HOME and WP_SITEURL
+COPY wp-config.php /var/www/html/wp-config.php
