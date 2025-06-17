@@ -9,4 +9,8 @@ RUN chown www-data:www-data /var/www
 USER www-data:www-data
 
 # Overwrite wp-config.php to set WP_HOME and WP_SITEURL
-COPY wp-config.php /var/www/html/wp-config.php
+COPY wp-config.php /tmp/wp-config.php
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
