@@ -96,6 +96,9 @@ define('WP_SITEURL', getenv('WORDPRESS_SITEURL'));
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
         $_SERVER['HTTPS'] = 'on';
 }
+// for testing only:
+$_SERVER['HTTPS'] = 'on';
+// remove the above
 
 /* That's all, stop editing! Happy publishing. */
 
