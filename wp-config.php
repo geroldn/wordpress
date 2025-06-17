@@ -84,6 +84,7 @@ define( 'WP_DEBUG', false );
  *
  * Takes the values from environment variables that can be set in render service settings.
  */
+define('WP_USE_THEMES', false);
 define('WP_HOME', getenv('WORDPRESS_HOME'));
 define('WP_SITEURL', getenv('WORDPRESS_SITEURL'));
 
