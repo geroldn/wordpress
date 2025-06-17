@@ -12,5 +12,10 @@ USER www-data:www-data
 COPY wp-config.php /var/www/html/wp-config.php
 
 RUN echo "PLAZUNO TEST:"
-RUN echo "<?php define('WP_HOME', 'https://yourdomain.com/docs'); define('WP_SITEURL', 'https://yourdomain.com/docs'); require_once('/var/www/html/wp-config-sample.php');" > /var/www/html/wp-config.php
+RUN printf "%s\n" "<?php" \
+  "define('WP_HOME', 'https://yourdomain.com/docs');" \
+  "define('WP_SITEURL', 'https://yourdomain.com/docs');" \
+  "require_once('/var/www/html/wp-config-sample.php');" \
+  > /var/www/html/wp-config.php
+
 
