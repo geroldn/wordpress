@@ -4,10 +4,6 @@ FROM wordpress:5.3.2-apache
 
 RUN apt-get update && apt-get install -y magic-wormhole
 
-RUN usermod -s /bin/bash www-data
-RUN chown www-data:www-data /var/www
-USER www-data:www-data
-
 # Overwrite wp-config.php to set WP_HOME and WP_SITEURL
 COPY wp-config.php /var/www/html/wp-config.php
 
@@ -17,5 +13,9 @@ RUN printf "%s\n" "<?php" \
   "define('WP_SITEURL', 'https://yourdomain.com/docs');" \
   "require_once('/var/www/html/wp-config-sample.php');" \
   > /var/www/html/wp-config.php
+
+RUN usermod -s /bin/bash www-data
+RUN chown www-data:www-data /var/www
+USER www-data:www-data
 
 
