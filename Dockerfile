@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y magic-wormhole
 
 # Overwrite wp-config.php to set WP_HOME and WP_SITEURL
 COPY wp-config.php /var/www/html/wp-config.php
+RUN sleep 5
+COPY wp-config.php /var/www/html/wp-config_copy.php
 
-RUN echo "PLAZUNO TEST:"
 RUN printf "%s\n" "<?php" \
   "define('WP_HOME', 'https://yourdomain.com/docs');" \
   "define('WP_SITEURL', 'https://yourdomain.com/docs');" \
