@@ -13,11 +13,25 @@ cp /tmp_wp-config.php /var/www/html/wp-config.php
 
 echo ">> Creating .../docs and move all files into it."
 cd /var/www/html
-mkdir docs
-for fi  in * .*
-do
-mv $fi docs/$fi
+
+# Ensure docs/ exists and is empty
+if [ -d docs ]; then
+  echo "📂 'docs' exists — emptying..."
+  rm -rf docs/*
+  rm -rf docs/.* 2>/dev/null || true  # Avoid error on . and ..
+else
+  echo "📁 'docs' not found — creating it..."
+  mkdir docs
+fi
+
+# Move everything except 'docs' into 'docs/'
+for fi in * .*; do
+  if [[ "$fi" != "." && "$fi" != ".." && "$fi" != "docs" ]]; then
+    mv "$fi" docs/
+  fi
 done
+
+echo "✅ Done: all files moved into 'docs/'"
 
 # Then exec the original command (starts Apache)
 /usr/local/bin/docker-entrypoint.sh apache2-foreground
